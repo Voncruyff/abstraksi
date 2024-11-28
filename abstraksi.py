@@ -1,24 +1,40 @@
-# prompt: abstraksi eith phyton
+from abc import ABC, abstractmethod
 
-class MyClass:
-    def __init__(self, public_attr, protected_attr, private_attr):
-        self.public_attr = public_attr
-        self._protected_attr = protected_attr  # Protected attribute (convention)
-        self.__private_attr = private_attr  # Private attribute (name mangling)
+# Kelas abstrak
+class Kendaraan(ABC):
+    @abstractmethod
+    def jumlah_roda(self):
+        pass
 
-    def get_private_attr(self):
-        return self.__private_attr
+    @abstractmethod
+    def jenis_bahan_bakar(self):
+        pass
 
-    def set_private_attr(self, new_value):
-        self.__private_attr = new_value
+    def deskripsi(self):
+        return "Kendaraan adalah alat transportasi."
 
-class MyChildClass(MyClass):
-    def __init__(self, public_attr, protected_attr, private_attr, child_attr):
-        super().__init__(public_attr, protected_attr, private_attr)
-        self.child_attr = child_attr
-    
-    def get_attributes(self):
-      print(f"Public: {self.public_attr}")
-      print(f"Protected: {self._protected_attr}")
-      print(f"Private: {self.get_private_attr()}")
-      print(f"Child: {self.child_attr}")
+# Kelas konkret
+class Mobil(Kendaraan):
+    def jumlah_roda(self):
+        return 4
+
+    def jenis_bahan_bakar(self):
+        return "Bensin atau Solar"
+
+class Motor(Kendaraan):
+    def jumlah_roda(self):
+        return 2
+
+    def jenis_bahan_bakar(self):
+        return "Bensin"
+
+# Contoh penggunaan
+mobil = Mobil()
+motor = Motor()
+
+print(mobil.deskripsi())  # Output: Kendaraan adalah alat transportasi.
+print(f"Mobil: {mobil.jumlah_roda()} roda, bahan bakar: {mobil.jenis_bahan_bakar()}")
+# Output: Mobil: 4 roda, bahan bakar: Bensin atau Solar
+
+print(f"Motor: {motor.jumlah_roda()} roda, bahan bakar: {motor.jenis_bahan_bakar()}")
+# Output: Motor: 2 roda, bahan bakar: Bensin
